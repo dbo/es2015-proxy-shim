@@ -2,7 +2,7 @@
  * es2015-proxy-shim
  *
  * @license
- * Released under MIT license <https://github.com/dbo/es2015-proxy-shim/LICENSE>
+ * Released under MIT license <https://raw.githubusercontent.com/dbo/es2015-proxy-shim/master/LICENSE>
  * Copyright (c) Daniel Bölzle
  */
 

@@ -14,7 +14,9 @@
   ],
   "keywords": [
     "es2015",
+    "es6",
     "proxy",
+    "trap",
     "shim"
   ],
   "author": "Daniel Bölzle",
