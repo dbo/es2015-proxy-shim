@@ -27,7 +27,7 @@ $ npm install es2015-proxy-shim --save
 ## Usage
 
 ```js
-require("core-js");
+require("core-js/shim");
 require("es2015-proxy-shim");
 
 var p = new Proxy({ foo: 5 }, {

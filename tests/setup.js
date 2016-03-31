@@ -1,7 +1,7 @@
 /* eslint-env node, mocha */
 "use strict";
 
-require("core-js");
+require("core-js/shim");
 require("../index.js");
 
 /**
