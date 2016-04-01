@@ -43,6 +43,7 @@
                         if (!descr.writable) {
                             return false;
                         }
+                        descr = Object.assign({}, descr);
                         descr.value = value;
                         Object.defineProperty(target, key, descr);
                     } else {
