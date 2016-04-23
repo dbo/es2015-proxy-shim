@@ -21,7 +21,17 @@
     }
 
     var reflSet = Reflect.set,
-        SUPPORTED_TRAPS = new Set(["apply", "construct", "get", "set"]),
+        UNSUPPORTED_TRAPS = new Set([
+            "has",
+            "deleteProperty",
+            "defineProperty",
+            "ownKeys",
+            "getOwnPropertyDescriptor",
+            "getPrototypeOf",
+            "isExtensible",
+            "preventExtensions",
+            "setPrototypeOf"
+        ]),
         PROXY_DEF = Symbol("proxy-def"),
         propsMapCache = new WeakMap();
 
@@ -179,7 +189,7 @@
 
     function Proxy(target, handler) {
         Object.getOwnPropertyNames(handler).forEach(function(trap) {
-            if (!SUPPORTED_TRAPS.has(trap)) {
+            if (UNSUPPORTED_TRAPS.has(trap)) {
                 throw new TypeError("unsupported trap: " + trap);
             }
         });

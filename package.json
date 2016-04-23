@@ -1,6 +1,6 @@
 {
   "name": "es2015-proxy-shim",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A limited ES2015 Proxy shim.",
   "main": "index.js",
   "scripts": {
