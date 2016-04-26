@@ -16,11 +16,12 @@
         return;
     }
     if (!global.Reflect) {
-        console.warn("es2015-proxy-shim: Missing Reflect.")
+        console.warn("es2015-proxy-shim: Missing Reflect.");
         return;
     }
 
     var reflSet = Reflect.set,
+        reflGet = Reflect.get,
         UNSUPPORTED_TRAPS = new Set([
             "has",
             "deleteProperty",
@@ -36,8 +37,24 @@
         propsMapCache = new WeakMap();
 
     /**
-     * Patched Reflect.set to properly handle Reflect.set fallbacks in proxy traps.
+     * Patched Reflect.get and Reflect.set to properly handle proxies.
      */
+    Reflect.get = function(target, key, receiver) {
+        if (receiver && receiver !== target) {
+            var pdef = target[PROXY_DEF];
+            if (typeof pdef !== "undefined") { // a proxy
+                if (!pdef) {
+                    throw new TypeError("Reflect.get on revoked target proxy.");
+                }
+                if (pdef.h.get) {
+                    return pdef.h.get(pdef.t, key, receiver);
+                }
+                return Reflect.get(pdef.t, key, receiver);
+            }
+        }
+        // fallback to original:
+        return Reflect.apply(reflGet, Reflect, arguments);
+    };
     Reflect.set = function(target, key, value, receiver) {
         if (receiver && receiver !== target) {
             var pdef = receiver[PROXY_DEF];
@@ -64,6 +81,7 @@
                     }
                     return true;
                 }
+                return Reflect.set(pdef.t, key, value, receiver);
             }
         }
         // fallback to original:
@@ -77,7 +95,7 @@
         return function() {
             var pdef = this[PROXY_DEF];
             if (!pdef) {
-                throw new TypeError("Calling on revoked proxy.");
+                throw new TypeError("Getting property on revoked proxy: " + key);
             }
             if (pdef.h.get) {
                 return pdef.h.get(pdef.t, key, this);
@@ -92,7 +110,7 @@
         return function(value) {
             var pdef = this[PROXY_DEF];
             if (!pdef) {
-                throw new TypeError("Calling on revoked proxy.");
+                throw new TypeError("Setting property on revoked proxy: " + key);
             }
             if (pdef.h.set) {
                 if (pdef.h.set(pdef.t, key, value, this) === false) {
@@ -190,7 +208,7 @@
     function Proxy(target, handler) {
         Object.getOwnPropertyNames(handler).forEach(function(trap) {
             if (UNSUPPORTED_TRAPS.has(trap)) {
-                throw new TypeError("unsupported trap: " + trap);
+                throw new TypeError("Unsupported trap: " + trap);
             }
         });
 
