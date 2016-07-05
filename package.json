@@ -24,7 +24,7 @@
   "repository": "dbo/es2015-proxy-shim",
   "devDependencies": {
     "core-js": "^2.2.1",
-    "eslint": "^2.5.3",
+    "eslint": "^3.0.0",
     "mocha": "^2.4.5"
   },
   "eslintConfig": {
