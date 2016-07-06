@@ -1,10 +1,10 @@
 {
   "name": "es2015-proxy-shim",
-  "version": "1.0.2",
   "description": "A limited ES2015 Proxy shim.",
   "main": "index.js",
   "scripts": {
-    "test": "eslint . && mocha tests"
+    "test": "eslint . && mocha tests",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "engines": {
     "node": ">=5.0.0"
@@ -21,11 +21,15 @@
   ],
   "author": "Daniel Bölzle",
   "license": "MIT",
-  "repository": "dbo/es2015-proxy-shim",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbo/es2015-proxy-shim.git"
+  },
   "devDependencies": {
     "core-js": "^2.2.1",
     "eslint": "^3.0.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "semantic-release": "^4.3.5"
   },
   "eslintConfig": {
     "env": {

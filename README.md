@@ -1,4 +1,5 @@
 # es2015-proxy-shim [![Build Status](https://travis-ci.org/dbo/es2015-proxy-shim.svg?branch=master)](https://travis-ci.org/dbo/es2015-proxy-shim) [![npm](https://img.shields.io/npm/v/es2015-proxy-shim.svg)](https://www.npmjs.com/package/es2015-proxy-shim)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/dbo/es2015-proxy-shim)
 
 > An simple ES2015 Proxy shim that relies on a non-extensible fixed set of properties at the time of proxying a target object or function.
 
