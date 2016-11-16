@@ -113,7 +113,7 @@
                 throw new TypeError("Setting property on revoked proxy: " + key);
             }
             if (pdef.h.set) {
-                if (pdef.h.set(pdef.t, key, value, this) === false) {
+                if (!pdef.h.set(pdef.t, key, value, this)) {
                     // assuming strict mode
                     throw new TypeError("Setting " + key + " on " + pdef.t + " has failed.");
                 }
