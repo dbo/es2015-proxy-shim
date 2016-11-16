@@ -240,14 +240,19 @@
         this[PROXY_DEF] = null;
     }
 
-    Proxy.revocable = function revocable(target, handler) {
-        var proxy = new Proxy(target, handler);
+    Object.defineProperties(Proxy, {
+        revocable: {
+            value: function revocable(target, handler) {
+                var proxy = new Proxy(target, handler);
 
-        return {
-            proxy: proxy,
-            revoke: revoker.bind(proxy)
-        };
-    };
+                return {
+                    proxy: proxy,
+                    revoke: revoker.bind(proxy)
+                };
+            }
+        },
+        __shim: { value: true }
+    });
 
     global.Proxy = Proxy;
 
