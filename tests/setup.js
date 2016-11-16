@@ -28,7 +28,7 @@ module.exports = function() {
             x.key = k;
             x.value = v
             x.receiver = r;
-            Reflect.set(t, k, v, r);
+            return Reflect.set(t, k, v, r);
         }
     });
 
