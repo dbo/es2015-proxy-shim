@@ -180,8 +180,11 @@
 
         if (ownNames.length || ownSymbols.length) {
             ret = Object.assign({}, ret);
-            var p, tdescr;
-            for (p of ownNames) {
+            var p, tdescr,
+                i, len;
+
+            for (i = 0, len = ownNames.length; i < len; ++i) {
+                p = ownNames[i];
                 tdescr = Object.getOwnPropertyDescriptor(obj, p);
                 ret[p] = {
                     tdescr: tdescr,
@@ -190,7 +193,8 @@
                     enumerable: !!tdescr.enumerable
                 };
             }
-            for (p of ownSymbols) {
+            for (i = 0, len = ownSymbols.length; i < len; ++i) {
+                p = ownSymbols[i];
                 tdescr = Object.getOwnPropertyDescriptor(obj, p);
                 ret[p] = {
                     tdescr: tdescr,
