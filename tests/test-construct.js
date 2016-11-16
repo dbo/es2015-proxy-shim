@@ -16,9 +16,11 @@ describe("Proxy#construct", function() {
     it("should have the correct target", function() {
         assert.equal(x.target, x.fn);
     });
-    it("should have the correct new.target", function() {
-        assert.equal(x.newTarget, x.fn);
-    });
+    if (Proxy.__shim) {
+        it("should have the correct new.target", function() {
+            assert.equal(x.newTarget, x.fn);
+        });
+    }
     it("should have the correct args", function() {
         assert.deepEqual(Array.from(x.args), [5, 6, 7]);
     });

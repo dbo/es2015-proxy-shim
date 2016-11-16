@@ -55,12 +55,15 @@ describe("Proxy#set", function() {
         });
     });
 
-    describe("#new-properties", function() {
-        it("should fail on defining new properties", function() {
-            assert.throws(function() {
-                var p = new Proxy({}, {});
-                p.goo = 5;
-            }, TypeError);
+
+    if (Proxy.__shim) {
+        describe("#new-properties", function() {
+            it("should fail on defining new properties", function() {
+                assert.throws(function() {
+                    var p = new Proxy({}, {});
+                    p.goo = 5;
+                }, TypeError);
+            });
         });
-    });
+    }
 });
