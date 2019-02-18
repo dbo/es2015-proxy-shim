@@ -28,7 +28,7 @@
   "devDependencies": {
     "core-js": "^2.2.1",
     "cz-conventional-changelog": "^2.0.0",
-    "eslint": "^4.1.1",
+    "eslint": "^5.14.1",
     "mocha": "^4.0.0",
     "semantic-release": "^7.0.1"
   },
